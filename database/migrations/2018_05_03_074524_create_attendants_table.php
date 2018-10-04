@@ -28,7 +28,6 @@ class CreateAttendantsTable extends Migration
             $table->integer('is_confirmed')->nullable()->default(0);
             $table->timestamps();
         });
-
     }
 
     /**
