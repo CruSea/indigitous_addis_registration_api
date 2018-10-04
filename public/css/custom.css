@@ -1,0 +1,12 @@
+.my-center{
+    text-align: center;
+    font-size: 20px;
+    border-bottom: 1px #eeeeee solid;
+    padding: 1px;
+}
+
+.my-center-mini{
+    text-align: center;
+    border-bottom: 1px #eeeeee solid;
+    padding: 1px;
+}
