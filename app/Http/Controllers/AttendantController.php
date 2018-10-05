@@ -119,7 +119,8 @@ class AttendantController extends MainController
         $state = $new_attendant->save();
         if($state){
             $message = "Dear " . $new_attendant->full_name .
-                ", Thank you for registering for the 2018 Indigitous #Hack which takes place in Addis Ababa, Gurid Shola, Holy City center from October 19 - 21, 2018.";
+                ", Thank you for registering for the 2018 Indigitous #Hack which takes place in Addis Ababa, Gurid Shola, Holy City center from October 19 - 21, 2018."
+                . " \n \n See Holy City Center ( https://maps.app.goo.gl/i/dUpo8 ) in Google Maps.";
             $this->sendMessage($message, $new_attendant->phone);
             return response()->json(["success" => true, "result"=>$new_attendant]);
         }
