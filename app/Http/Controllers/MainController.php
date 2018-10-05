@@ -72,7 +72,7 @@ class MainController extends Controller
 
     public function sendMessage($message, $phone){
 
-        $logger = new Logger("AttendantMessageCTRL");
+//        $logger = new Lo/**/gger("AttendantMessageCTRL");
 
         $api_key  = MainController::$SETTING_NEGARIT_API_KEY;
         $campaign_id = MainController::$SETTING_CAMPAIGN_ID;
@@ -87,7 +87,7 @@ class MainController extends Controller
         $this->addSMSLog($message, $phone);
         try{
             $response_data = json_decode($response);
-            $logger->log(Logger::INFO, "Message Request", [$response_data]);
+//            $logger->log(Logger::INFO, "Message Request", [$response_data]);
 
             if(! isset($response_data->status)){
                 $response1 = HTTPRequester::HTTPPost($url, $header, $api_key);

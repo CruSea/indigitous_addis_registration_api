@@ -106,18 +106,18 @@ class AttendantController extends MainController
         $new_attendant = new Attendant();
         $new_attendant->full_name =  isset($credentials['full_name']) ? $credentials['full_name'] : "";
         $new_attendant->phone =  isset($credentials['phone']) ? $credentials['phone'] : "";
-        $new_attendant->email =  isset($credentials['email']) ? $credentials['email'] : "";
-        $new_attendant->age =  isset($credentials['age']) ? $credentials['age'] : "";
-        $new_attendant->sex =  isset($credentials['sex']) ? $credentials['sex'] : "";
-        $new_attendant->region =  isset($credentials['region']) ? $credentials['region'] : "";
-        $new_attendant->city =  isset($credentials['city']) ? $credentials['city'] : "";
-        $new_attendant->profession =  isset($credentials['profession']) ? $credentials['profession'] : "";
-        $new_attendant->academic_status =  isset($credentials['academic_status']) ? $credentials['academic_status'] : "";
+        $new_attendant->email =  isset($credentials['email']) ? $credentials['email'] : null;
+        $new_attendant->age =  isset($credentials['age']) ? $credentials['age'] : null;
+        $new_attendant->sex =  isset($credentials['sex']) ? $credentials['sex'] : null;
+        $new_attendant->region =  isset($credentials['region']) ? $credentials['region'] : null;
+        $new_attendant->city =  isset($credentials['city']) ? $credentials['city'] : null;
+        $new_attendant->profession =  isset($credentials['profession']) ? $credentials['profession'] : null;
+        $new_attendant->academic_status =  isset($credentials['academic_status']) ? $credentials['academic_status'] : null;
 
         $state = $new_attendant->save();
         if($state){
             $message = "Dear " . $new_attendant->full_name .
-                ", Thank you for registering for the 2018 Indigitous #Hack which takes place in Addis Ababa from October 19 - 21, 2018.";
+                ", Thank you for registering for the 2018 Indigitous #Hack which takes place in Addis Ababa, Gurid Shola, Holy City center from October 19 - 21, 2018.";
             $this->sendMessage($message, $new_attendant->phone);
             return response()->json(["success" => true, "result"=>$new_attendant]);
         }

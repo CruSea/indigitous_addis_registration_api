@@ -25,6 +25,7 @@ class CreateAttendantsTable extends Migration
             $table->string('profession')->nullable();
             $table->string('academic_status')->nullable();
             $table->string('conference_year')->nullable();
+            $table->string('conference_place')->nullable();
             $table->integer('is_confirmed')->nullable()->default(0);
             $table->timestamps();
         });
