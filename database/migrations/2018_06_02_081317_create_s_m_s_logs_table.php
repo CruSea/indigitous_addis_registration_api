@@ -16,7 +16,7 @@ class CreateSMSLogsTable extends Migration
         Schema::create('s_m_s_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('phone');
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
         });
     }

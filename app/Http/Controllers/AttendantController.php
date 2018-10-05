@@ -102,10 +102,13 @@ class AttendantController extends MainController
             $error = $validator->messages();
             return response()->json(['status' => false, 'error' => $error], 400);
         }
+        $phone = $credentials['phone'];
+        $phone = substr($phone,strlen($phone)-9,9);
+        $phone = "251" . $phone;
 
         $new_attendant = new Attendant();
         $new_attendant->full_name =  isset($credentials['full_name']) ? $credentials['full_name'] : "";
-        $new_attendant->phone =  isset($credentials['phone']) ? $credentials['phone'] : "";
+        $new_attendant->phone =  $phone;
         $new_attendant->email =  isset($credentials['email']) ? $credentials['email'] : null;
         $new_attendant->age =  isset($credentials['age']) ? $credentials['age'] : null;
         $new_attendant->sex =  isset($credentials['sex']) ? $credentials['sex'] : null;
