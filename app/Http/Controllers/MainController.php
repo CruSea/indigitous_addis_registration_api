@@ -21,11 +21,11 @@ use Monolog\Logger;
  */
 class MainController extends Controller
 {
-
     public static $SETTING_SMS_SERVER= "http://api.negarit.net/api/api_request";
     public static $SETTING_NEGARIT_API_KEY= "HTvA2us8zawfPZgEFflT9jbUDcIfz1j0";
     public static $SETTING_CAMPAIGN_ID= "55";
     public static $SETTING_PORT_ID= "1";
+    public static $SETTING_CONTACT_GROUP_ID= "64";
 
     public static $SMS_SERVER_ACTION_SEND_MESSAGE = "sent_message";
     public static $SMS_SERVER_ACTION_GET_CAMPAIGNS = "campaigns";
@@ -71,9 +71,6 @@ class MainController extends Controller
     }
 
     public function sendMessage($message, $phone){
-
-//        $logger = new Lo/**/gger("AttendantMessageCTRL");
-
         $api_key  = MainController::$SETTING_NEGARIT_API_KEY;
         $campaign_id = MainController::$SETTING_CAMPAIGN_ID;
 
@@ -87,26 +84,35 @@ class MainController extends Controller
         $this->addSMSLog($message, $phone);
         try{
             $response_data = json_decode($response);
-//            $logger->log(Logger::INFO, "Message Request", [$response_data]);
+            if(isset($response_data->status)){
 
-            if(! isset($response_data->status)){
-                $response1 = HTTPRequester::HTTPPost($url, $header, $api_key);
-                $response_data1 = json_decode($response1);
-                if(! isset($response_data1->status)){
-                    $response2 = HTTPRequester::HTTPPost($url, $header, $api_key);
-                    $response_data2 = json_decode($response2);
-
-                    if(! isset($response_data2->status)){
-                        $response3 = HTTPRequester::HTTPPost($url, $header, $api_key);
-                    }
-                }
             }
         } catch (\Exception $exception){
-            if(! isset($response_data->status)){
-                $response = HTTPRequester::HTTPPost($url, $header, $api_key);
-            }
+
         }
     }
 
+    public function addToGroup($name, $phone, $email, $message){
+        $api_key  = MainController::$SETTING_NEGARIT_API_KEY;
+        $campaign_id = MainController::$SETTING_CAMPAIGN_ID;
+        $group_id = MainController::$SETTING_CONTACT_GROUP_ID;
+
+        $header = array("API_KEY" => $api_key,
+            "group_id" => $group_id,
+            "full_name" => $name,
+            "phone" => $phone,
+            "email" => $email);
+
+        $url        =  MainController::$SETTING_SMS_SERVER . "/grouped_contact/new_contact";
+        $response = HTTPRequester::HTTPPost($url, $header, $api_key);
+        try{
+            $response_data = json_decode($response);
+            if(isset($response_data->status)){
+                $this->sendMessage($message, $phone);
+            }
+        } catch (\Exception $exception){
+
+        }
+    }
 
 }
