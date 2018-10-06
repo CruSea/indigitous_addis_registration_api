@@ -82,6 +82,7 @@ class MainController extends Controller
         $url        =  MainController::$SETTING_SMS_SERVER . "/sent_message";
         $response = HTTPRequester::HTTPPost($url, $header, $api_key);
         $this->addSMSLog($message, $phone);
+
         try{
             $response_data = json_decode($response);
             if(isset($response_data->status)){
@@ -92,24 +93,23 @@ class MainController extends Controller
         }
     }
 
-    public function addToGroup($name, $phone, $email, $message){
-        $api_key  = MainController::$SETTING_NEGARIT_API_KEY;
-        $campaign_id = MainController::$SETTING_CAMPAIGN_ID;
-        $group_id = MainController::$SETTING_CONTACT_GROUP_ID;
+    public function addToGroup($name, $phone, $email){
+        $logger = new Logger("MessageActionTaskCtrl");
 
+        $api_key  = MainController::$SETTING_NEGARIT_API_KEY;
+        $group_id = MainController::$SETTING_CONTACT_GROUP_ID;
         $header = array("API_KEY" => $api_key,
             "group_id" => $group_id,
             "full_name" => $name,
             "phone" => $phone,
             "email" => $email);
 
-        $url        =  MainController::$SETTING_SMS_SERVER . "/grouped_contact/new_contact";
+        $url        =  MainController::$SETTING_SMS_SERVER . "/grouped_contact";
         $response = HTTPRequester::HTTPPost($url, $header, $api_key);
+
         try{
-            $response_data = json_decode($response);
-            if(isset($response_data->status)){
-                $this->sendMessage($message, $phone);
-            }
+//            $response_data = json_decode($response);
+//            $logger->log(Logger::INFO, "Executing Action TASKs", $response_data);
         } catch (\Exception $exception){
 
         }

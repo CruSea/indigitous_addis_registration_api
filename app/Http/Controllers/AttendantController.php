@@ -125,8 +125,8 @@ class AttendantController extends MainController
             $message = "Dear " . $new_attendant->full_name .
                 ", Thank you for registering for the 2018 Indigitous #Hack which takes place in Addis Ababa, Gurid Shola, Holy City center from October 19 - 21, 2018."
                 . " \n \n See Holy City Center ( https://maps.app.goo.gl/i/dUpo8 ) in Google Maps.";
-//            $this->sendMessage($message, $new_attendant->phone);
-            $this->addToGroup($new_attendant->full_name, $new_attendant->phone, $new_attendant->email, $message);
+            $this->addToGroup($new_attendant->full_name, $new_attendant->phone, $new_attendant->email);
+            $this->sendMessage($message, $new_attendant->phone);
 
             return response()->json(["success" => true, "result"=>$new_attendant]);
         }
