@@ -23,7 +23,7 @@ class CreateAttendantsTable extends Migration
             $table->string('region')->nullable();
             $table->string('city')->nullable();
             $table->string('profession')->nullable();
-            $table->string('academic_status')->nullable();
+            $table->string('interest')->nullable();
             $table->string('conference_year')->nullable();
             $table->string('conference_place')->nullable();
             $table->integer('is_confirmed')->nullable()->default(0);

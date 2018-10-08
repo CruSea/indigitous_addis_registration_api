@@ -93,7 +93,7 @@ class AttendantController extends MainController
         ];
 
         $credentials = $request->only(
-            'full_name', 'phone', 'email', 'age', 'sex', 'region', 'city', 'profession', 'academic_status', 'conference_year', 'conference_place'
+            'full_name', 'phone', 'email', 'age', 'sex', 'region', 'city', 'profession', 'interest', 'conference_year', 'conference_place'
         );
 
         $validator = Validator::make($credentials, $rules);
@@ -116,7 +116,7 @@ class AttendantController extends MainController
         $new_attendant->region =  isset($credentials['region']) ? $credentials['region'] : null;
         $new_attendant->city =  isset($credentials['city']) ? $credentials['city'] : null;
         $new_attendant->profession =  isset($credentials['profession']) ? $credentials['profession'] : null;
-        $new_attendant->academic_status =  isset($credentials['academic_status']) ? $credentials['academic_status'] : null;
+        $new_attendant->interest =  isset($credentials['interest']) ? $credentials['interest'] : null;
         $new_attendant->conference_year =  isset($credentials['conference_year']) ? $credentials['conference_year'] : null;
         $new_attendant->conference_place =  isset($credentials['conference_place']) ? $credentials['conference_place'] : null;
 
